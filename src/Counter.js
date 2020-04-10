@@ -6,7 +6,7 @@ import moment from "moment/moment";
 const url =
   process.env.NODE_ENV === "development"
     ? process.env.REACT_APP_API_LOCAL_URL
-    : process.env.REACT_APP_API_URL;
+    : "https://coffe-counter-backend.herokuapp.com";
 
 class Counter extends React.Component {
   constructor(props) {
