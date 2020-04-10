@@ -74,7 +74,7 @@ class Counter extends React.Component {
   };
 
   render() {
-    console.log (url);
+    console.log (url,process.env.NODE_ENV);
 
     return (
       <div className="App">
