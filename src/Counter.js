@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { getSum } from "./utils";
 import moment from "moment/moment";
+import Loading from "../src/Loading";
 
 const url =
   process.env.NODE_ENV === "development"
@@ -17,6 +18,7 @@ class Counter extends React.Component {
       priceSum: null,
       visible: false,
       focusedPriceId: null,
+      loading: false,
     };
   }
 
@@ -25,10 +27,12 @@ class Counter extends React.Component {
   }
 
   fetchPrices() {
+    this.setState({ loading: true });
     fetch(`${url}/prices/allToday`)
       .then((response) => response.json())
       .then((get) => {
         this.setState({ prices: get });
+        this.setState({ loading: false });
       });
   }
 
@@ -74,9 +78,9 @@ class Counter extends React.Component {
   };
 
   render() {
-    console.log (url,process.env.NODE_ENV);
-
-    return (
+    return this.state.loading ? (
+      <Loading />
+    ) : (
       <div className="App">
         <div className="CashArr">
           {this.state.prices.map((el, index) => (
